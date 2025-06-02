@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Joe & The Juice Store Management System - Performance Analytics Dashboard">
+    <meta name="theme-color" content="#FF6B35">
+    <title>Joe & The Juice - Store Manager</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Preconnect to API -->
+    <link rel="preconnect" href="http://localhost:3000">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="joe-logo">
+                <div class="logo-circle">J</div>
+                <span class="logo-text">Joe & The Juice</span>
+            </div>
+            <div class="loading-spinner"></div>
+            <p>Loading Store Manager...</p>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-circle">J</div>
+                    <span class="logo-text">Store Manager</span>
+                </div>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav" id="nav">
+            <div class="nav-content">
+                <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#stores" class="nav-item" data-page="stores">
+                    <span class="nav-icon">🏪</span>
+                    <span class="nav-text">Stores</span>
+                </a>
+                <a href="#employees" class="nav-item" data-page="employees">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Employees</span>
+                </a>
+                <a href="#analytics" class="nav-item" data-page="analytics">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-text">Analytics</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main" id="main">
+            <!-- Dashboard Page -->
+            <div id="dashboard-page" class="page active">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Store performance overview</p>
+                </div>
+                
+                <div class="metrics-grid" id="metrics-grid">
+                    <!-- Metrics cards will be loaded here -->
+                    <div class="metric-card" data-metric="total-stores">
+                        <div class="metric-icon">🏪</div>
+                        <div class="metric-content">
+                            <div class="metric-label">Total Stores</div>
+                            <div class="metric-value">-</div>
+                            <div class="metric-change">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" data-metric="active-employees">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-content">
+                            <div class="metric-label">Active Employees</div>
+                            <div class="metric-value">-</div>
+                            <div class="metric-change">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" data-metric="total-revenue">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-content">
+                            <div class="metric-label">Total Revenue</div>
+                            <div class="metric-value">-</div>
+                            <div class="metric-change">-</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" data-metric="avg-performance">
+                        <div class="metric-icon">📈</div>
+                        <div class="metric-content">
+                            <div class="metric-label">Avg Performance</div>
+                            <div class="metric-value">-</div>
+                            <div class="metric-change">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-section">
+                    <div class="chart-card">
+                        <h3>Performance Chart</h3>
+                        <div id="performance-chart" class="chart-content">
+                            <!-- Performance chart will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Country Breakdown</h3>
+                        <div id="country-chart" class="chart-content">
+                            <!-- Country chart will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-section">
+                    <div class="activity-card">
+                        <div id="recent-activity">
+                            <!-- Recent activity will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stores Page -->
+            <div id="stores-page" class="page">
+                <div class="page-header">
+                    <h1>Stores</h1>
+                    <button class="btn btn-primary" id="add-store-btn">+ Add Store</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="store-search" placeholder="Search stores..." class="search-input">
+                </div>
+
+                <div class="stores-grid" id="stores-grid">
+                    <!-- Stores will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Employees Page -->
+            <div id="employees-page" class="page">
+                <div class="page-header">
+                    <h1>Employees</h1>
+                    <button class="btn btn-primary" id="add-employee-btn">+ Add Employee</button>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" id="employee-search" placeholder="Search employees..." class="search-input">
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="inactive">Inactive</button>
+                    <button class="filter-btn" data-filter="managers">Managers</button>
+                    <button class="filter-btn" data-filter="baristas">Baristas</button>
+                    <button class="filter-btn" data-filter="high-performers">Top Performers</button>
+                </div>
+
+                <div class="employees-grid" id="employees-grid">
+                    <!-- Employees will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analytics-page" class="page">
+                <div class="page-header">
+                    <h1>Analytics</h1>
+                    <p>Detailed performance insights</p>
+                </div>
+                
+                <div class="analytics-content" id="analytics-content">
+                    <!-- Analytics will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal" id="modal">
+            <!-- Modal content will be dynamically loaded -->
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html> 

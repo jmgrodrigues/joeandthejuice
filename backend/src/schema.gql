@@ -1,0 +1,166 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CountryStats {
+  averagePerformance: Float!
+  country: String!
+  storeCount: Int!
+  totalRevenue: Float!
+}
+
+input CreateEmployeeDto {
+  email: String!
+  firstName: String!
+  hireDate: String!
+  lastName: String!
+  performanceScore: Float
+  phone: String
+  position: String!
+  salary: Float!
+  storeId: ID!
+}
+
+input CreateStoreDto {
+  address: String!
+  city: String!
+  country: String!
+  email: String
+  manager: String!
+  monthlyRevenue: Float
+  name: String!
+  performanceScore: Float
+  phone: String
+}
+
+type DashboardMetrics {
+  countryStats: [CountryStats!]!
+  employeeAnalytics: EmployeeAnalytics!
+  storeAnalytics: StoreAnalytics!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Employee {
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  hireDate: DateTime!
+  hoursWorked: Int!
+  id: ID!
+  isActive: Boolean!
+  lastName: String!
+  performanceScore: Float!
+  phone: String
+  position: String!
+  salary: Float!
+  store: Store!
+  storeId: ID!
+  updatedAt: DateTime!
+}
+
+type EmployeeAnalytics {
+  activeEmployees: Int!
+  averagePerformanceScore: Float!
+  averageSalary: Float!
+  topPerformingEmployees: [EmployeePerformance!]!
+  totalEmployees: Int!
+}
+
+type EmployeePerformance {
+  employeeId: String!
+  employeeName: String!
+  hoursWorked: Int!
+  performanceScore: Float!
+  position: String!
+  storeName: String!
+}
+
+type Mutation {
+  createEmployee(createEmployeeDto: CreateEmployeeDto!): Employee!
+  createStore(createStoreDto: CreateStoreDto!): Store!
+  removeEmployee(id: ID!): Boolean!
+  removeStore(id: ID!): Boolean!
+  updateEmployee(updateEmployeeDto: UpdateEmployeeDto!): Employee!
+  updateEmployeeHours(hours: Int!, id: ID!): Employee!
+  updateStore(updateStoreDto: UpdateStoreDto!): Store!
+}
+
+type Query {
+  countryStats: [CountryStats!]!
+  dashboardMetrics: DashboardMetrics!
+  employee(id: ID!): Employee!
+  employeeAnalytics: EmployeeAnalytics!
+  employees: [Employee!]!
+  employeesByPosition(position: String!): [Employee!]!
+  employeesByStore(storeId: ID!): [Employee!]!
+  store(id: ID!): Store!
+  storeAnalytics: StoreAnalytics!
+  storePerformance(storeId: ID!): StorePerformance
+  stores: [Store!]!
+  storesByCity(city: String!): [Store!]!
+  storesByCountry(country: String!): [Store!]!
+}
+
+type Store {
+  address: String!
+  city: String!
+  country: String!
+  createdAt: DateTime!
+  email: String
+  employeeCount: Int!
+  employees: [Employee!]
+  id: ID!
+  isActive: Boolean!
+  manager: String!
+  monthlyRevenue: Float!
+  name: String!
+  performanceScore: Float!
+  phone: String
+  updatedAt: DateTime!
+}
+
+type StoreAnalytics {
+  activeStores: Int!
+  averagePerformanceScore: Float!
+  averageRevenue: Float!
+  topPerformingStores: [StorePerformance!]!
+  totalStores: Int!
+}
+
+type StorePerformance {
+  employeeCount: Int!
+  performanceScore: Float!
+  revenue: Float!
+  storeId: String!
+  storeName: String!
+}
+
+input UpdateEmployeeDto {
+  email: String
+  firstName: String
+  hireDate: String
+  id: ID!
+  lastName: String
+  performanceScore: Float
+  phone: String
+  position: String
+  salary: Float
+  storeId: ID
+}
+
+input UpdateStoreDto {
+  address: String
+  city: String
+  country: String
+  email: String
+  id: ID!
+  manager: String
+  monthlyRevenue: Float
+  name: String
+  performanceScore: Float
+  phone: String
+}
